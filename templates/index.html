@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<section id="addTodo">
+  <div class="container my-5">
+    <form action="#" method="POST">
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Todo Title</label>
+        <input placeholder="Enter Your Todo Title" class="form-control" name="title">
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label" ">Todo Description</label>
+      <input class=" form-control" placeholder="Enter Your Todo Description" name="desc">
+      </div>
+      <button type="submit" class="btn btn-outline-success">Add Todo</button>
+    </form>
+  </div>
+</section>
+
+<section id="todos" class="container my-5">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Sr.No.</th>
+        <th scope="col">Title</th>
+        <th scope="col">Description</th>
+        <th scope="col">Data_Created</th>
+        <th scope="col">Modify</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for todo in alltodo %}
+      {% if todo.done == True %}
+      <tr>
+        <th scope="row" class="bg-success-subtle">{{loop.index}}</th>
+        <td class="bg-success-subtle">{{todo.title}}</td>
+        <td class="bg-success-subtle">{{todo.desc}}</td>
+        <td class="bg-success-subtle">{{todo.dateCreated}}</td>
+        <td class="bg-success-subtle">
+          <a href="/delete/{{todo.Sno}}" class="btn btn-outline-danger p-1">Delete</a>
+        </td>
+      </tr>
+
+      {% else %}
+      <tr>
+        <th scope="row">{{loop.index}}</th>
+        <td>{{todo.title}}</td>
+        <td>{{todo.desc}}</td>
+        <td>{{todo.dateCreated}}</td>
+        <td>
+          <a href="/update/{{todo.Sno}}" class="btn btn-outline-success p-1">Update</a>
+          <a href="/delete/{{todo.Sno}}" class="btn btn-outline-danger p-1">Delete</a>
+        </td>
+      </tr>
+      {% endif %}
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+{% endblock %}
